@@ -1,28 +1,34 @@
 ### 魔法方法
 
+- `__init__` 构造器，当一个实例被创建的时候初始化的方法。但是它并 不是实例化调用的第一个方法
+
+- `__new__ `才是实例化对象调用的第一个方法，它只取下 cls 参数，并把 其他参数传给``` __init__```。``` __new__```很少使 用，但是也有它适合的场景，尤其 是当类继承自一个像元组或者字符串这样不经常改变的类型的时候。
+
+  - 单例
+
+  - ```python
+    class A(object):
+    	__instance = None
+    	def __new__(cls， *args， **kwargs):
+    		if cls.__instance is None:
+    			cls.__instance = object.__new__(cls)
+    			return cls.__instance 
+    		else:
+    			return cls.__instance
+    ```
+
 - `__iter__` 可迭代对象,返回一个容器迭代器
-
 - `__next__` 返回迭代器的下一个元素
-
 - `__call__` 可调用 对应(),允许一个类像函数一样被调用
-
-- `__getitem__` 对应[]
-
-- `__str__` print对象
-
+- `__getitem__` 定义获取容器中指定元素的行为，相当于 self[key]
 - `__enter__` 进入对象执行
-
 - `__exit__` 使用完成退出对象执行 (上下文管理器)
-
-- `__del__` 内存回收执行
-
-- `__new__ `用来创建类并返回这个类的实例
-
-单例,在init之前执行,设置一个类属性,创建对象时赋值,再次实例化时检测到类属性改变直接return
-
-- `__init__` 初始化,和new共同构成了构造函数
-
+- ```__getattr__ ```定义当用户试图访问一个不存在属性的时候的行为 。
+- ```__setattr__ ```定义当一个属性被设置的时候的行为 。
+- ```__getattribute__``` 定义当一个属性被访问的时候的行为 。
 - `__doc__` 打印注释
+- `__str__` print对象
+- `__del__` 内存回收执行
 
 
 
@@ -30,21 +36,44 @@
 
 ### 线程,进程,协程
 
-- 线程:`processing`
+- 进程:`processing`
 
-- 进程:`threating`
+  ```python
+  import os
+  from multiprocessing import Process 
+  import time
+  def pro_func(name, age, **kwargs):
+  	for i in range(5):
+  		print("子进程正在运行中,name=%s, age=%d, pid=%d" %(name, age, os.getpid()))
+  		print(kwargs)
+  		time.sleep(0.2)
+  if __name__ == '__main__':
+   	# 创建 Process 对象
+  	p = Process(target=pro_func, args=('小明',18), kwargs={'m': 20})
+   	# 启动进程
+  	p.start()
+    time.sleep(1)
+    p.terminate()
+    p.join()
+  ```
+
+- 线程:`threating`
+
+- 进程与线程的使用场景
+
+  > 多进程适合在 CPU 密集型操作(cpu 操作指令比较多，如位数多的浮点运算)。 
+  >
+  > 多线程适合在 IO 密集型操作(读写数据操作较多的，比如爬虫)。
 
 - 协程:`yield`?
-
-- 线程锁:?
-
-- 进程锁:?
 
 - 猴子补丁:
 
 - 使用协程时，通常在模块头部加入：gevent.monkey.patch_all()
 
 
+
+---
 
 
 
@@ -70,7 +99,7 @@
 
 - 静态方法:`@staticmethod`
 
-
+---
 
 ### 生成器,迭代器
 
@@ -89,10 +118,14 @@
 
 
 - 可迭代对象 Iterable
-
 - isinstance(iter, Iterable) -> True
-
 - 可以直接作用于for循环的对象统称为可迭代对象
+
+
+
+---
+
+
 
 ### 内存管理,垃圾回收
 
@@ -119,9 +152,9 @@
 
   - 3 应用层,用户操作
 
-### 继承
+---
 
-- 面对对象三大特性: 继承,多态,封装
+
 
 ### 高级函数
 
@@ -129,21 +162,35 @@
 
 - map
 
-- reduce
-
 - lambda 参数1,参数2..:参数表达式
+
+---
 
 
 
 ### 正则re
 
-???
+- match与search的区别
 
+  >match()函数只检测 RE 是不是在 string 的开始位置匹配，search()会扫描整个 string 查找匹配;
+  >也就是说 match()只有在 0 位置匹配成功的话才有返回， 如果不是开始位置匹配成功的话，match()就返回 none。
+  
+- Python字符串查找和替换
+
+  > re.findall(r’目的字符串’，’原有字符串’) #查询
+  >
+  > re.findall(r'cast'，'itcast.cn')[0]
+  >
+  > re.sub(r‘要替换原字符’，’要替换新字符’，’原始字符串’) 
+  >
+  > re.sub(r'cast'，'heima'，'itcast.cn')
 - 零宽断言
 
 - (?=exp):断言自身出现的位置的后面能匹配表达式exp
 
 - (?<=exp)断言自身出现的位置的后面能匹配表达式exp
+
+---
 
 
 
@@ -177,3 +224,6 @@
 
 - GIL(全局解释器锁)
 
+- 面对对象三大特性: 继承,多态,封装
+
+  

@@ -1,15 +1,16 @@
-- uWSGI的理解
+##### uWSGI的理解
 
-  >1.uWSGI 是一个 Web 服务器，它实现了 WSGI 协议、uwsgi、http 等协议。Nginx 中HttpUwsgiModule 的作用是与 uWSGI 服务器进行交换。WSGI 是一种 Web 服务器网关接口。它是一 个 Web 服务器(如 nginx，uWSGI 等服务器)与 web 应用(如用 Flask 框架写的程序)通信的一种 规范。
+  >1.uWSGI 是一个 Web 服务器，它实现了 WSGI 协议、uwsgi、http 等协议。Nginx 中	HttpUwsgiModule 的作用是与 uWSGI 服务器进行交换。WSGI 是一种 Web 服务器网关	接口。它是一 个 Web 服务器(如 nginx，uWSGI 等服务器)与 web 应用(如用 Flask 框架写的程序)通信的一种 规范。
 
-- WSGI / uwsgi / uWSGI 这三个概念的区分
+##### WSGI / uwsgi / uWSGI 这三个概念的区分
 
-  >WSGI 是一种通信协议。
-  >uwsgi 是一种线路协议而不是通信协议，在此常用于在 uWSGI 服务器与其他网络服务器的数据通信。
-  >
-  >uWSGI 是实现了 uwsgi 和 WSGI 两种协议的 Web 服务器。
+>WSGI 是一种通信协议。
+>uwsgi 是一种线路协议而不是通信协议，在此常用于在 uWSGI 服务器与其他网络服务器的数据通信。
+>
+>uWSGI 是实现了 uwsgi 和 WSGI 两种协议的 Web 服务器。
 
-- Nginx的理解
+##### Nginx的理解
+
   - nginx 是一个开源的高性能的 HTTP 服务器和反向代理
   - 作为 web 服务器，它处理静态文件和索引文件效果非常高
   - 它的设计非常注重效率，最大支持 5 万个并发连接，但只占用很少的内存空间

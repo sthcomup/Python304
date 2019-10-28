@@ -103,19 +103,14 @@
 
 ### 生成器,迭代器
 
-- 生成器:
-
+- ![img](https://i.loli.net/2017/05/06/590d99e937114.png)
+- 生成器:[廖雪峰生成器](https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128)
 - `type() -> genetator`
-
 - 每次调用 next() 生成下一个结果
-
 - 生成器也是可迭代对象
-
 - 迭代器:
 
 可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator
-
-
 
 - 可迭代对象 Iterable
 - isinstance(iter, Iterable) -> True
